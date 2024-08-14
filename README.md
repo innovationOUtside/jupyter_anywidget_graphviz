@@ -10,9 +10,9 @@ pip install jupyter_anywidget_graphviz
 
 ![Example of graphviz anywidget](images/graphviz_anywidget.png)
 
-## Usage
+## Usage
 
-This runs in a Jupyter environment:
+This runs in a browser based Jupyter environment and uses the browser machinery to run the wasm application.
 
 ```python
 # Import package
