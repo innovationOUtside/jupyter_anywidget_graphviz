@@ -24,6 +24,7 @@ g = graphviz_headless()
 
 # Inline mode
 # Preview output as cell output from initialising cell
+# - works in: Jupyter Lab, Jupyter Notebook, VS Code
 # g = graphviz_inline()
 
 # Create a widget panel with a handle
