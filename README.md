@@ -16,11 +16,15 @@ This runs in a browser based Jupyter environment and uses the browser machinery 
 
 ```python
 # Import package
-from jupyter_anywidget_graphviz import graphviz_headless, graphviz_panel
+from jupyter_anywidget_graphviz import graphviz_headless, graphviz_panel, graphviz_inline
 
 # Create a headless widget
 # - works in: Jupyter Lab, Jupyter Notebook, VS Code
 g = graphviz_headless()
+
+# Inline mode
+# Preview output as cell output from initialising cell
+# g = graphviz_inline()
 
 # Create a widget panel with a handle
 # - uses jupyter sidecar (Jupyter Lab only)
