@@ -16,10 +16,15 @@ This runs in a browser based Jupyter environment and uses the browser machinery 
 
 ```python
 # Import package
-from jupyter_anywidget_graphviz import graphviz_panel
+from jupyter_anywidget_graphviz import graphviz_headless, graphviz_panel
+
+# Create a headless widget
+# - works in: Jupyter Lab, Jupyter Notebook, VS Code
+g = graphviz_headless()
 
 # Create a widget panel with a handle
-g = graphviz_panel()
+# - uses jupyter sidecar (Jupyter Lab only)
+#g = graphviz_panel()
 
 # Load magic
 %load_ext jupyter_anywidget_graphviz
@@ -36,7 +41,7 @@ We can now write `dot` code in a magicked code cell (`%%graphviz_magic WIDGET_HA
   }
 ```
 
-The output is previewed in the panel.
+The output is previewed in the UI panel, if rendered.
 
 Retrieve the SVG diagram as `WIDGET_HANDLE.svg`.
 
