@@ -1,13 +1,13 @@
 from functools import wraps
-from sidecar import Sidecar
 from IPython.display import display
-
 
 # Create a decorator to simplify panel autolaunch
 # First parameter on decorated function is optional title
 # Second parameter on decorated function is optional anchor location
 # Via Claude.ai
 def create_panel(widget_class):
+    from sidecar import Sidecar
+
     @wraps(widget_class)
     def wrapper(title=None, anchor="split-right"):
         if title is None:

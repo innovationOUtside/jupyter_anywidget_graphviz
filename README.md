@@ -38,13 +38,17 @@ g = graphviz_headless()
 We can now write `dot` code in a magicked code cell (`%%graphviz_magic WIDGET_HANDLE`):
 
 ```python
-%%graphviz_magic g
+%%graphviz_magic -w g
   strict graph {
     a -- b
     a -- b
     b -- a [color=blue]
   }
 ```
+
+The `-w / ----widget-name` setting can be used to pass set the widget withing the magic and it does not need to be passed again.
+
+The widget can also be set via line magic: `%setwidget g`
 
 The output is previewed in the UI panel, if rendered.
 
