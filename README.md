@@ -46,7 +46,7 @@ We can now write `dot` code in a magicked code cell (`%%graphviz_magic WIDGET_HA
   }
 ```
 
-The `-w / --widget-name` setting can be used to pass set the widget withing the magic and it does not need to be passed again.
+The `-w / --widget-name` setting can be used to set the widget within the magic and it does not need to be passed again.
 
 The widget can also be set via line magic: `%setwidget g`
 
