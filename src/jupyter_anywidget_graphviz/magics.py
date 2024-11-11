@@ -38,8 +38,6 @@ class GraphvizAnywidgetMagic(Magics):
                 if w.svg:
                     display(SVG(w.svg))
                 else:
-                    import time
-                    time.sleep(1)
                     display(f"No SVG?")
 
     @line_magic
@@ -68,4 +66,4 @@ class GraphvizAnywidgetMagic(Magics):
         return self._run_query(args, cell)
 
 ## %load_ext jupyter_anywidget_graphviz
-## Usage: %%graphviz_magic x [where x is the widget object ]
+## Usage: %%graphviz_magic -w x [where x is the widget object ]
