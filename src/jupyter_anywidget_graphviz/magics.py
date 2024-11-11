@@ -1,5 +1,6 @@
 from IPython.core.magic import Magics, magics_class, cell_magic, line_magic
 from IPython.core.magic_arguments import argument, magic_arguments, parse_argstring
+from IPython.display import display, SVG
 
 @magics_class
 class GraphvizAnywidgetMagic(Magics):
@@ -30,6 +31,16 @@ class GraphvizAnywidgetMagic(Magics):
             # Get the actual widget
             w = self.widget
             w.set_code_content(q)
+            autorespond = bool(args.timeout or args.embed)
+            if autorespond:
+                timeout = args.timeout if args.timeout > 0 else 5
+                w.blocking_reply(timeout)
+                if w.svg:
+                    display(SVG(w.svg))
+                else:
+                    import time
+                    time.sleep(1)
+                    display(f"No SVG?")
 
     @line_magic
     def setwidget(self, line):
@@ -38,9 +49,20 @@ class GraphvizAnywidgetMagic(Magics):
 
     @cell_magic
     @magic_arguments()
-    @argument('-w', '--widget-name', type=str, help='widget variable name')
-    @argument("-r", "--response", action="store_true", help="Provide response from cell (not JupyterLite)")
-    @argument("-t", "--timeout", type=float, default=0, help="timeout period on blocking response (default: 5)")
+    @argument("-w", "--widget-name", type=str, help="widget variable name")
+    @argument(
+        "-e",
+        "--embed",
+        action="store_true",
+        help="Embed response from cell (not JupyterLite)",
+    )
+    @argument(
+        "-t",
+        "--timeout",
+        type=float,
+        default=0,
+        help="timeout period on blocking response (default: 5)",
+    )
     def graphviz_magic(self, line, cell):
         args = parse_argstring(self.graphviz_magic, line)
         return self._run_query(args, cell)

@@ -62,6 +62,10 @@ from IPython.display import SVG
 SVG(g.svg)
 ```
 
+In its base form, the way the Jupyter event loop runs means we canlt directly generate an output from the magic cell. However, setting the `-e/--embed` flag, or setting a timeout `-t/--timeout SECONDS` (default 5s), we can force a blocking action on the cell that waits for the asynchronous graphviz object to return the gernerated SVG, and then render it.
+
+The `.blocking_reply()` method on the object will also block until the response status is set to *completed*.
+
 ## Alternative solutions
 
 [viz.js](https://viz-js.com/) [[repo](https://github.com/mdaines/viz-js)] also seems to offer in browser graphviz rendering. [`KrunkZhou/jupyterlab-viz-krunk`](https://github.com/KrunkZhou/jupyterlab-viz-krunk) is a JupyterLab extension (untested) that seems to support backticked ` ```graphviz ` blocks in markdown cells.
