@@ -20,8 +20,8 @@ function render({ model, el }) {
     model.on("change:code_content", () => {
       const dot = model.get("code_content");
 
-      function handle_svg(model, graphviz) {
-        const svg = graphviz.dot(dot);
+      async function handle_svg(model, graphviz) {
+        const svg = await graphviz.dot(dot);
         model.set("svg", svg);
         model.save_changes();
         return svg;
