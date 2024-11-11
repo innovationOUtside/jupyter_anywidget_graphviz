@@ -16,7 +16,20 @@ class GraphvizAnywidgetMagic(Magics):
             self.widget_name = w_name
         self.widget = self.shell.user_ns[self.widget_name]
         # Perhaps add a test that it is a widget type, else None?
-        #print(f"graphviz_magic object set to: {self.widget_name}")
+        # print(f"graphviz_magic object set to: {self.widget_name}")
+
+    def _run_query(self, args, q):
+        if args.widget_name:
+            self._set_widget(args.widget_name)
+        if self.widget is None:
+            print(
+                "Error: No widget / widget name set. Use %set_myAnywidget_object first to set the name."
+            )
+            return
+        elif q:
+            # Get the actual widget
+            w = self.widget
+            w.set_code_content(q)
 
     @line_magic
     def setwidget(self, line):
@@ -26,17 +39,11 @@ class GraphvizAnywidgetMagic(Magics):
     @cell_magic
     @magic_arguments()
     @argument('-w', '--widget-name', type=str, help='widget variable name')
+    @argument("-r", "--response", action="store_true", help="Provide response from cell (not JupyterLite)")
+    @argument("-t", "--timeout", type=float, default=0, help="timeout period on blocking response (default: 5)")
     def graphviz_magic(self, line, cell):
         args = parse_argstring(self.graphviz_magic, line)
-        if args.widget_name:
-            self._set_widget(args.widget_name)
-        if self.widget is None :
-            print("Error: No widget / widget name set. Use %set_myAnywidget_object first to set the name.")
-            return
-        elif cell:
-            # Get the actual widget
-            w = self.widget
-            w.set_code_content(cell)
+        return self._run_query(args, cell)
 
 ## %load_ext jupyter_anywidget_graphviz
 ## Usage: %%graphviz_magic x [where x is the widget object ]
