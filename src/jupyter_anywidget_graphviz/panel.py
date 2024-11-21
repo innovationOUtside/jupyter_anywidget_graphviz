@@ -1,6 +1,6 @@
 from functools import wraps
 from IPython.display import display
-
+import warnings
 
 # Create a decorator to simplify panel autolaunch
 # First parameter on decorated function is optional title
