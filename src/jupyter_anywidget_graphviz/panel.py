@@ -7,7 +7,13 @@ from IPython.display import display
 # Second parameter on decorated function is optional anchor location
 # Via Claude.ai
 def create_panel(func):
-    from sidecar import Sidecar
+    try:
+        from sidecar import Sidecar
+    except:
+        warnings.warn(
+            "Missing package (sidecar): run `pip install sidecar` before trying to access the panel.",
+            UserWarning,
+        )
 
     @wraps(func)
     def wrapper(title=None, anchor="split-right", *args, **kwargs):

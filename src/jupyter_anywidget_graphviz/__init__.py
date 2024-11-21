@@ -64,8 +64,8 @@ class graphvizWidget(anywidget.AnyWidget):
 
     def set_code_content(self, value):
         self.response = {"status": "processing"}
+        self.svg = ''
         self.code_content = value
-
 
 def graphviz_headless():
     widget_ = graphvizWidget(headless=True)
