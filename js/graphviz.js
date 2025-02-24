@@ -1,5 +1,7 @@
 import "./graphviz.css";
 import "./uuid.js";
+import { play_success, play_error } from "./audio";
+
 import html from "./graphviz.html";
 import { generateUUID } from "./uuid";
 
@@ -9,6 +11,7 @@ import { Graphviz } from "@hpcc-js/wasm-graphviz";
 function render({ model, el }) {
 
   function handle_error(error) {
+    if (model.get("audio")) play_error(error.message);
     console.log(error);
     //if (model.get("audio")) play_error(error.message);
     model.set("response", {

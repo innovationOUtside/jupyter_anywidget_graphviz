@@ -68,6 +68,8 @@ In its base form, the way the Jupyter event loop runs means we can't directly ge
 
 The `.blocking_reply()` method on the object will also block until the response status is set to *completed*.
 
+If you set `g.audio = True`, error messages will be spoken alound using browser text to speech.
+
 ## Alternative solutions
 
 [viz.js](https://viz-js.com/) [[repo](https://github.com/mdaines/viz-js)] also seems to offer in browser graphviz rendering. [`KrunkZhou/jupyterlab-viz-krunk`](https://github.com/KrunkZhou/jupyterlab-viz-krunk) is a JupyterLab extension (untested) that seems to support backticked ` ```graphviz ` blocks in markdown cells.

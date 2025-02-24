@@ -5,7 +5,6 @@ import anywidget
 import traitlets
 import time
 import warnings
-import logger
 
 import platform
 
@@ -43,6 +42,7 @@ class graphvizWidget(anywidget.AnyWidget):
     code_content = traitlets.Unicode("").tag(sync=True)
     svg = traitlets.Unicode("").tag(sync=True)
     response = traitlets.Dict().tag(sync=True)
+    audio = traitlets.Bool(False).tag(sync=True)
 
     def __init__(self, headless=False, **kwargs):
         super().__init__(**kwargs)
@@ -54,9 +54,6 @@ class graphvizWidget(anywidget.AnyWidget):
     def _wait(self, timeout, conditions=("status", "completed")):
         if not WAIT_AVAILABLE or conditions[0] not in self.response:
             # No wait condition available
-            logger.warning("No wait available. Are you in a pyodide environment?")
-            return
-
         start_time = time.time()
         with ui_events() as ui_poll:
             while (self.response[conditions[0]] != conditions[1]) & (
