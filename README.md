@@ -64,7 +64,7 @@ from IPython.display import SVG
 SVG(g.svg)
 ```
 
-In its base form, the way the Jupyter event loop runs means we canlt directly generate an output from the magic cell. However, setting the `-e/--embed` flag, or setting a timeout `-t/--timeout SECONDS` (default 5s), we can force a blocking action on the cell that waits for the asynchronous graphviz object to return the gernerated SVG, and then render it.
+In its base form, the way the Jupyter event loop runs means we can't directly generate an output from the magic cell. However, setting the `-e/--embed` flag, or setting a timeout `-t/--timeout SECONDS` (default 5s), we can force a blocking action on the cell that waits for the asynchronous graphviz object to return the generated SVG, and then render it.
 
 The `.blocking_reply()` method on the object will also block until the response status is set to *completed*.
 
