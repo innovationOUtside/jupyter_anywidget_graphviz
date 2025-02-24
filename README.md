@@ -48,13 +48,15 @@ We can now write `dot` code in a magicked code cell (`%%graphviz_magic WIDGET_HA
 
 The `-w / --widget-name` setting can be used to set the widget within the magic and it does not need to be passed again.
 
+Use the `-e / --embed` flag or the `-t / --timeout TIMEOUT_IN_S` switch to render the output SVG as cell output (not JupyterLite / marimo).
+
 The widget can also be set via line magic: `%setwidget g`
 
 The output is previewed in the UI panel, if rendered.
 
 Retrieve the SVG diagram as `WIDGET_HANDLE.svg`.
 
-We can display the diagram in the notebook e.g. as:
+We can also display the diagram manually in the notebook e.g. as:
 
 ```python
 from IPython.display import SVG
