@@ -7,6 +7,17 @@ import { generateUUID } from "./uuid";
 import { Graphviz } from "@hpcc-js/wasm-graphviz";
 
 function render({ model, el }) {
+
+  function handle_error(error) {
+    console.log(error);
+    //if (model.get("audio")) play_error(error.message);
+    model.set("response", {
+      status: "error",
+      error_message: error.message,
+    });
+    model.save_changes();
+  }
+
   const _headless = model.get("headless");
   Graphviz.load().then((graphviz) => {
     model.set("response", { status: "ready" });
@@ -22,11 +33,17 @@ function render({ model, el }) {
 
     model.on("change:code_content", () => {
       const dot = model.get("code_content");
+      if (!dot) return;
 
       async function handle_svg(model, graphviz) {
-        const svg = await graphviz.dot(dot);
-        model.set("svg", svg);
-        model.set("response", {status:"completed", svg: svg})
+        let svg;
+        try {
+          svg = await graphviz.dot(dot);
+          model.set("svg", svg);
+          model.set("response", {status:"completed", svg: svg})
+        } catch (error) {
+          handle_error(error);
+        }
         model.save_changes();
         return svg;
       }
