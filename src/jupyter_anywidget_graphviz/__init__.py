@@ -7,6 +7,7 @@ import time
 import warnings
 
 import platform
+import logging
 
 PLATFORM = platform.system().lower()
 
@@ -54,6 +55,8 @@ class graphvizWidget(anywidget.AnyWidget):
     def _wait(self, timeout, conditions=("status", "completed")):
         if not WAIT_AVAILABLE or conditions[0] not in self.response:
             # No wait condition available
+            logging.warning("No wait available. Are you in a pyodide environment?")
+            return
         start_time = time.time()
         with ui_events() as ui_poll:
             while (self.response[conditions[0]] != conditions[1]) & (
@@ -80,7 +83,7 @@ class graphvizWidget(anywidget.AnyWidget):
 
     def set_code_content(self, value):
         self.response = {"status": "processing"}
-        #if value == self.previous_dot:
+        # if value == self.previous_dot:
         #    self.response = {"status": "completed"}
         #    return
         self.svg = ""
