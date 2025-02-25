@@ -70,6 +70,10 @@ The `.blocking_reply()` method on the object will also block until the response 
 
 If you set `g.audio = True`, error messages will be spoken alound using browser text to speech.
 
+### Running in marimo
+
+The reactivity is a bit off, but it can eventually getg there if you let things settle then force particular cells to re-run: [example marimo notebook](https://marimo.app/?slug=y2q0gj)
+
 ## Alternative solutions
 
 [viz.js](https://viz-js.com/) [[repo](https://github.com/mdaines/viz-js)] also seems to offer in browser graphviz rendering. [`KrunkZhou/jupyterlab-viz-krunk`](https://github.com/KrunkZhou/jupyterlab-viz-krunk) is a JupyterLab extension (untested) that seems to support backticked ` ```graphviz ` blocks in markdown cells.
