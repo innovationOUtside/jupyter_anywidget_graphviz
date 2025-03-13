@@ -2,6 +2,8 @@
 
 Jupyter [`anywidget`](https://github.com/manzt/anywidget) for rendering diagrams from `.dot` language to SVG using Graphviz Wasm ([`hpcc-systems/hpcc-js-wasm`](https://github.com/hpcc-systems/hpcc-js-wasm)).
 
+Demo: [JupyterLite Demo](https://innovationoutside.github.io/jupyter_anywidget_graphviz/lab/index.html?path=jupyter_graphviz_anywidget_example.ipynb)
+
 Install as:
 
 ```sh
@@ -69,6 +71,33 @@ In its base form, the way the Jupyter event loop runs means we can't directly ge
 The `.blocking_reply()` method on the object will also block until the response status is set to *completed*.
 
 If you set `g.audio = True`, error messages will be spoken alound using browser text to speech.
+
+### Headless example
+
+```python
+from jupyter_anywidget_graphviz import (
+    graphviz_headless,
+)
+
+class graphVizSVG:
+    def __init__(self, svg: str):
+        self.svg = svg
+    def _repr_svg_(self):
+        return self.svg
+
+g = graphviz_headless()
+dot = """
+  strict graph {
+    a -- b
+    a -- c
+    b -- a [color=red]
+  }
+"""
+g.set_code_content(dot)
+g.blocking_reply()
+
+graphVizSVG(g.svg)
+```
 
 ### Running in marimo
 
