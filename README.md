@@ -14,6 +14,8 @@ pip install jupyter_anywidget_graphviz
 
 ## Usage
 
+*See examples in `jupyter_graphviz_anywidget_example.ipynb`*
+
 This runs in a browser based Jupyter environment and uses the browser machinery to run the wasm application.
 
 ```python
